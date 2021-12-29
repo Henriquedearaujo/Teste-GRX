@@ -18,7 +18,7 @@ function editar(botao) {
             var conteudoOriginal = $(this).text();
 
 
-            $(this).addClass("celulaEmEdicao");
+            $(this).addClass("idade");
             $(this).html("<input type='text' value='" + conteudoOriginal + "' />");
             $(this).children().first().focus();
 
@@ -27,8 +27,8 @@ function editar(botao) {
 
                 var novoConteudo = $(this).val();
                 $(this).parent().text(novoConteudo);
-                Nomes.push(d.getElementsByClassName("celulaEmEdicao").value);
-                $(this).parent().removeClass("celulaEmEdicao");
+                Nomes.push(d.getElementsByClassName("idede").value);
+                $(this).parent().removeClass("idade");
 
 
 
@@ -37,7 +37,7 @@ function editar(botao) {
 
             $(this).children().first().blur(function () {
                 $(this).parent().text(conteudoOriginal);
-                $(this).parent().removeClass("celulaEmEdicao");
+                $(this).parent().removeClass("idade");
 
                 return stop;
 
@@ -74,12 +74,12 @@ const isValidFields = () => {
 
 //Interação com o layout
 
+
 const clearFields = () => {
-    const fields = document.querySelectorAll('.modal-field')
+    const fields = document.querySelectorAll('[required]')
     fields.forEach(field => field.value = "")
     document.getElementById('nome').dataset.index = 'new'
 }
-
 
 const saveClient = () => {
     debugger
@@ -93,6 +93,7 @@ const saveClient = () => {
             createClient(client)
             updateTable()
             closeModal()
+             alert(`Salvo com Sucesso`)
         } else {
             updateClient(index, client)
             updateTable()
@@ -101,17 +102,19 @@ const saveClient = () => {
     }
 }
 
+
 const createRow = (client, index) => {
     const newRow = document.createElement('tr')
     newRow.innerHTML = `
-        <td>${client.nome}</td>
-        <td>${client.idade}</td>
-        <td>
-            <button type="button" class="button green" id="edit-${index}">Editar</button>
+    <td>${client.nome}</td>
+    <td>${client.idade}</td>
+    <td>
+    <button type="button" class="button green" id="edit-${index}">Editar</button>
             <button type="button" class="button red" id="delete-${index}" >Excluir</button>
-        </td>
-    `
-    document.querySelector('#tableClient>tbody').appendChild(newRow)
+            </td>
+            `
+            document.querySelector('#tableClient>tbody').appendChild(newRow)
+           
 }
 
 const clearTable = () => {
@@ -158,13 +161,17 @@ const editDelete = (event) => {
 
 updateTable()
 
+
 // Eventos
 
 document.getElementById('salvar')
-    .addEventListener('click', saveClient)
+.addEventListener('click', saveClient)
 
 document.querySelector('#tableClient>tbody')
-    .addEventListener('click', editDelete)
+.addEventListener('click', editDelete)
 
 document.getElementById('cancelar')
-    .addEventListener('click', closeModal)
+.addEventListener('click', closeModal)
+
+
+
