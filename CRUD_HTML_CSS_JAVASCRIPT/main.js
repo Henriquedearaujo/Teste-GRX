@@ -70,6 +70,7 @@ const createClient = (client) => {
 
 const isValidFields = () => {
     return document.getElementById('form').reportValidity()
+    
 }
 
 //Interação com o layout
@@ -87,6 +88,7 @@ const saveClient = () => {
         const client = {
             nome: document.getElementById('nome').value,
             idade: document.getElementById('idade').value,
+            
         }
         const index = document.getElementById('nome').dataset.index
         if (index == 'new') {
@@ -98,12 +100,14 @@ const saveClient = () => {
             updateClient(index, client)
             updateTable()
             closeModal()
+            alert(`Alterado com sucesso`)
         }
     }
 }
 
 
 const createRow = (client, index) => {
+    
     const newRow = document.createElement('tr')
     newRow.innerHTML = `
     <td>${client.nome}</td>
@@ -114,6 +118,7 @@ const createRow = (client, index) => {
             </td>
             `
             document.querySelector('#tableClient>tbody').appendChild(newRow)
+            
            
 }
 
@@ -126,12 +131,15 @@ const updateTable = () => {
     const dbClient = readClient()
     clearTable()
     dbClient.forEach(createRow)
+  
+   
 }
 
 const fillFields = (client) => {
     document.getElementById('nome').value = client.nome
     document.getElementById('idade').value = client.idade
     document.getElementById('nome').dataset.index = client.index
+    
 }
 
 const editClient = (index) => {
